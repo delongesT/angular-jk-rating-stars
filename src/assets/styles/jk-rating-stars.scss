@@ -27,3 +27,9 @@
 
   }
 }
+
+.jk-rating-stars-container[read-only="true"] {
+  .button {
+    cursor: default;
+  }
+}
