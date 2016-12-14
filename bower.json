@@ -1,7 +1,10 @@
 {
   "name": "angular-jk-rating-stars",
   "description": "Amazing rating stars directive for angular material",
-  "main": "",
+  "main": [
+    "./dist/jk-rating-stars.js",
+    "./dist/jk-rating-stars.css"
+  ],
   "authors": [
     "Juan Carlos Morales Mora <juank.memphis@gmail.com>"
   ],
