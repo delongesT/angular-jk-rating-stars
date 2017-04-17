@@ -19,7 +19,7 @@
 
     that.initStarsArray = function() {
       that.starsArray = that.getStarsArray();
-      that.validateStars();
+      that.validateStars(that.rating);
     };
 
     that.getStarsArray = function() {
