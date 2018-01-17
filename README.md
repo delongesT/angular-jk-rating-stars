@@ -36,7 +36,7 @@ angular.module('MyApp', ['jkAngularRatingStars']);
 
  - Add a `jk-rating-stars` tag to your html, set the amount of stars and bind a variable that will holds the selected value. If the maxRating variable is not set, we use the default of 5.
 ```html
-<jk-rating-stars max-rating="8" rating="ctrl.rating" read-only="ctrl.readOnly" on-rating="ctrl.onRating(rating)" >
+<jk-rating-stars max-rating="8" rating="ctrl.rating" read-only="ctrl.readOnly" shadow="false" reset-allowed="false" off-icon="star_border" off-color="false" on-rating="ctrl.onRating(rating)" >
 </jk-rating-stars>
 ```
 
