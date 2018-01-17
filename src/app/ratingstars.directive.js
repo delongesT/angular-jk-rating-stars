@@ -28,7 +28,10 @@
 				rating: '=?',
 				readOnly: '=?',
 				onRating: '&',
-				resetAllowed : '=?'
+				resetAllowed : '=?',
+                shadow: '=?',
+                offIcon: '@?',
+				offColor: '=?'
 			},
 			link: link
 		};
