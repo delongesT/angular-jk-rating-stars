@@ -12,7 +12,15 @@
 		if( that.resetAllowed === undefined ){
 			that.resetAllowed = true;
 		}
-
+        if(that.shadow === undefined){
+            that.shadow = true;
+        }
+        if(that.offIcon === undefined){
+            that.offIcon = 'star';
+        }
+        if(that.offColor === undefined){
+            that.offColor = true;
+        }
 		that.initStarsArray = function() {
 			that.starsArray = that.getStarsArray();
 			that.validateStars(that.rating);
@@ -23,8 +31,10 @@
 			for (var index = 0; index < that.maxRating; index++) {
 				var starItem = {
 						index: index,
-						class: 'star-off'
+						icon: that.offIcon
 				};
+                if(that.shadow) starItem.shadow = "star-button";
+                if(that.offColor) starItem.class = "star-off";
 				starsArray.push(starItem);
 			}
 			return starsArray;
@@ -57,9 +67,11 @@
 			for (var index = 0; index < that.starsArray.length; index++) {
 				var starItem = that.starsArray[index];
 				if (index <= (rating - 1)) {
-					starItem.class = 'star-on';
+                    starItem.class = "star-on";
+					starItem.icon = "star";
 				} else {
-					starItem.class = 'star-off';
+                    if(that.offColor) starItem.class = "star-off";
+					starItem.icon = that.offIcon;
 				}
 			}
 		};

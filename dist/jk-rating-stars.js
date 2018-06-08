@@ -20,7 +20,15 @@
 		if( that.resetAllowed === undefined ){
 			that.resetAllowed = true;
 		}
-
+        if(that.shadow === undefined){
+            that.shadow = true;
+        }
+        if(that.offIcon === undefined){
+            that.offIcon = 'star';
+        }
+        if(that.offColor === undefined){
+            that.offColor = true;
+        }
 		that.initStarsArray = function() {
 			that.starsArray = that.getStarsArray();
 			that.validateStars(that.rating);
@@ -31,8 +39,10 @@
 			for (var index = 0; index < that.maxRating; index++) {
 				var starItem = {
 						index: index,
-						class: 'star-off'
+						icon: that.offIcon
 				};
+                if(that.shadow) starItem.shadow = "star-button";
+                if(that.offColor) starItem.class = "star-off";
 				starsArray.push(starItem);
 			}
 			return starsArray;
@@ -65,9 +75,11 @@
 			for (var index = 0; index < that.starsArray.length; index++) {
 				var starItem = that.starsArray[index];
 				if (index <= (rating - 1)) {
-					starItem.class = 'star-on';
+                    starItem.class = "star-on";
+					starItem.icon = "star";
 				} else {
-					starItem.class = 'star-off';
+                    if(that.offColor) starItem.class = "star-off";
+					starItem.icon = that.offIcon;
 				}
 			}
 		};
@@ -113,7 +125,10 @@
 				rating: '=?',
 				readOnly: '=?',
 				onRating: '&',
-				resetAllowed : '=?'
+				resetAllowed : '=?',
+                shadow: '=?',
+                offIcon: '@?',
+				offColor: '=?'
 			},
 			link: link
 		};
@@ -127,4 +142,4 @@
 
 }());
 
-(function(){angular.module("jkAngularRatingStars.templates", []).run(["$templateCache", function($templateCache) {$templateCache.put("rating-stars-directive.html","<div\n  class=\"jk-rating-stars-container\"\n  layout=\"row\" >\n\n  <a\n    class=\"button\"\n    ng-click=\"ctrl.setRating(0)\"\n    ng-if=\"!ctrl.readOnly && ctrl.resetAllowed\" >\n    <i class=\"material-icons\">remove_circle_outline</i>\n  </a>\n\n  <a\n    class=\"button star-button\"\n    ng-class=\"item.class\"\n    ng-mouseover=\"ctrl.setMouseOverRating($index + 1)\"\n    ng-mouseleave=\"ctrl.setMouseOverRating(ctrl.rating)\"\n    ng-click=\"ctrl.setRating($index + 1)\"\n    ng-repeat=\"item in ctrl.starsArray\" >\n    <i class=\"material-icons\">star</i>\n  </a>\n\n</div>\n");}]);})();
+(function(){angular.module("jkAngularRatingStars.templates", []).run(["$templateCache", function($templateCache) {$templateCache.put("rating-stars-directive.html","<div\r\n  class=\"jk-rating-stars-container\"\r\n  layout=\"row\" >\r\n\r\n  <a\r\n    class=\"button\"\r\n    ng-click=\"ctrl.setRating(0)\"\r\n    ng-if=\"!ctrl.readOnly && ctrl.resetAllowed\" >\r\n    <i class=\"material-icons\">remove_circle_outline</i>\r\n  </a>\r\n\r\n  <a\r\n    class=\"button\"\r\n    ng-class=\"[item.class, item.shadow]\"\r\n    ng-mouseover=\"ctrl.setMouseOverRating($index + 1)\"\r\n    ng-mouseleave=\"ctrl.setMouseOverRating(ctrl.rating)\"\r\n    ng-click=\"ctrl.setRating($index + 1)\"\r\n    ng-repeat=\"item in ctrl.starsArray\" >\r\n    <i class=\"material-icons\">{{item.icon}}</i>\r\n  </a>\r\n\r\n</div>\r\n");}]);})();
