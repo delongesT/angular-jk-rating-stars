@@ -68,16 +68,36 @@
 			that.validateStars(rating);
 		};
 
-		that.validateStars = function(rating) {
+    that.isRatingDecimal = function(rating){
+			var factor         = 0.5;
+			var divisionResult = (rating / factor);
+			var oddEvenTest    = (divisionResult % 2);
+			if(oddEvenTest != 0){
+				return true;
+			}
+			else{
+				return false;
+			}
+		};
+    
+	that.validateStars = function(rating) {
 			if (!that.starsArray || that.starsArray.length === 0) {
 				return;
 			}
+			var difference = 0;
 			for (var index = 0; index < that.starsArray.length; index++) {
 				var starItem = that.starsArray[index];
-				if (index <= (rating - 1)) {
+				if (index <= (rating - 1)){
+					difference = (rating -1) - index;
                     starItem.class = "star-on";
 					starItem.icon = "star";
-				} else {
+				} 
+				else if(difference == 0.5){
+					starItem.class = "star";
+					starItem.icon = "star_half";
+					difference = 0;
+				}
+				else {
                     if(that.offColor) starItem.class = "star-off";
 					starItem.icon = that.offIcon;
 				}
